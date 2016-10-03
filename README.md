@@ -1,24 +1,8 @@
 # KeyValueStore
 
-**TODO: Add description**
+Implement the two missing functions in `lib/key_value_store`
+and get the tests to pass.
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-  1. Add `key_value_store` to your list of dependencies in `mix.exs`:
-
-    ```elixir
-    def deps do
-      [{:key_value_store, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `key_value_store` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:key_value_store]]
-    end
-    ```
+Hint: you'll actually need to implement four functions:
+two in the API and two in the server implementation.
 
