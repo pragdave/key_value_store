@@ -88,12 +88,12 @@ defmodule KeyValueStore do
   """
 
   def keys do
-    IO.puts "not yet implemented"
+    GenServer.call(@me, { :keys })
   end
 
   @doc """
   Delete the entry corresponding to a key from the store
-  
+
       iex> KeyValueStore.start dave: 123
       iex> KeyValueStore.set :language, "elixir"
       iex> KeyValueStore.keys
@@ -110,9 +110,9 @@ defmodule KeyValueStore do
       iex> KeyValueStore.stop
       :ok
   """
-  
+
   def delete(key) do
-    IO.puts "not yet implemented"
+    GenServer.cast(@me, { :delete, key })
   end
 
 
@@ -132,8 +132,18 @@ defmodule KeyValueStore do
     { :noreply, Map.put(state, key, value) }
   end
 
+  #Delete the entry corresponding to a key from the store
+  def handle_cast({ :delete, key }, state) do
+    { :noreply, Map.delete(state, key) }
+  end
+
   def handle_call({ :get, key }, _from, state) do
     { :reply, state[key], state }
+  end
+
+  # Return a sorted list of keys in the store
+  def handle_call({ :keys }, _from, state) do
+    { :reply, state |> Map.keys, state }
   end
 
 end
